@@ -1,0 +1,24 @@
+premieberakning.tillverkningsforlust
+premieberakning.fordringsforlust
+premieberakning.garantityp
+premieberakning.berakningsversion
+premieberakning.nummer
+premieberakning.land
+premieberakning.fordringsforlust.garantiprocentsats.politisk
+premieberakning.fordringsforlust.garantiprocentsats.kommersiell
+premieberakning.fordringsforlust.landriskklass.ekn
+premieberakning.fordringsforlust.landriskklass.oecd
+premieberakning.fordringsforlust.galdenarskategori
+premieberakning.fordringsforlust.arspremiesats
+premieberakning.fordringsforlust.arspremiesats.riskavspeglande
+premieberakning.fordringsforlust.arspremiesats.pris
+premieberakning.fordringsforlust.fordringsvaluta
+premieberakning.fordringsforlust.basranta
+premieberakning.fordringsforlust.utbetalningstid
+premieberakning.fordringsforlust.kredittid ; Kredittid i år.
+premieberakning.fordringsforlust.amorteringsfriPeriod
+premieberakning.fordringsforlust.antalAmorteringarPerAr
+premieberakning.fordringsforlust.utbetalningEfterKreditstarttidpunkt; boolean ja eller nej.
+
+
+

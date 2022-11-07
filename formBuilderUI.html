@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form builder</title>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="modal.js"></script>
+<script type="text/javascript" src="tables.js"></script>
+<script type="text/javascript" src="modelBuilder.js"></script>
+<script type="text/javascript" src="formbuilder.js"></script>
+<script type="text/javascript" src="controller.js"></script>
+<script type="text/javascript" src="persistance.js"></script>
+<link rel="stylesheet"  href="bulma.min.css"></style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Semantic Form Builder</h1>
+    <div class="columns">
+        <div class="column">
+            <ul>
+    <li><a href="javascript:showParameters()" >Parameters</a></li>
+    <li><a href="javascript:showPages()" >Pages</a></li>
+    <li><a href="javascript:showModel()">Model</a>&rarr;<a href="javascript:importModel()">Import Model</a></li>
+    <li><a href="javascript:showData()">Data</a>&rarr;<a href="javascript:syncData()">Sync Data</a></li>
+  <hr/>
+    <li><a href="javascript:showInputs()">Inputs</a> &rarr; <a href="javascript:showForm()">View</a></li>
+  </ul>
+  <form id="resultingForm">
+</form>
+</div>
+<div class="column">
+
+    <div id="parametersDiv" class="container" style="display:none;">
+        <h2 class="subtitle">Parameters</h2>
+        <p>Enums</p>
+        <table id="enumListing" class="table">
+            <thead><tr><th>Enum Name</th><th>Enum Description</th><th></th></tr></thead>
+            <tbody id="enumListingTBody">
+                <tr id="garantityp"><td>garantityp</td><td>b</td><td><a href="javascript:userClicksUpdateEnum('garantityp')">update</a>&nbsp;|&nbsp;<a href="javascript:userClicksDeleteEnum('garantityp')">delete</a></td></tr>
+                <tr id="landriskklass"><td>landriskklass</td><td></td><td>delete</td></tr>
+                <tr id="galdenarstyp"><td>galdenarstyp</td><td></td><td>delete</td></tr>
+                
+                <tr><td></td><td><a href="javascript:userClicksAddEnumRow()">create Enum</a></td></tr>
+
+            </tbody>
+            </table>
+
+        <table class="table">
+            <thead><tr><th>Enum Value</th><th>Enum Description</th><th></th></tr></thead>
+            <tbody>
+                <tr id="enum_"><td>a</td><td>b</td><td>delete</td></tr>
+                <tr><td>c</td><td>d</td></tr>
+                <tr></tr>
+
+            </tbody>
+            </table>
+
+        <p>Constants</p>
+        <table class="table">
+            <thead><tr><th>Constant</th><th>Value</th></tr></thead>
+            <tbody>
+                <tr><td>a</td><td>b</td></tr>
+                <tr><td>c</td><td>d</td></tr>
+                <tr></tr>
+
+            </tbody>
+            </table>
+ 
+        <p>Variables</p>
+        <table class="table">
+            <thead><tr><th>Variable</th><th>Initial value</th></tr></thead>
+            <tbody>
+                <tr><td>a</td><td>b</td></tr>
+                <tr><td>c</td><td>d</td></tr>
+                <tr></tr>
+
+            </tbody>
+            </table>
+ 
+        
+    </div>
+
+    <div id="modelDiv" class="container" style="display:none;">
+        <h2 class="subtitle">Model</h2>
+        <div class="container">
+            <ul id="modelList"></ul>
+            <hr/>
+            <div class="box">
+        <form>
+            <input type="hidden" id="modelElemIndex"></input>        
+            
+            <label class="label" for="modelElemDotPath">Element path:</label>
+            <input class="input" type="text" id="modelElemDotPath"></input>        
+
+            <label class="label" for="modelElemDescription">Element description:</label>
+            <input class="input" type="text" id="modelElemDescription"></input>  
+            <div class="container">
+              <input type="button" class = "button is-primary is-right" onclick="javascript:userClicksAddModelElem()" value="OK"></input>
+              <input type="button" class = "button is-primary is-right" onclick="javascript:userClicksClearModelInput()" value="Clear"></input>
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+    
+    <div id="importModelDiv">
+    <h2 class="subtitle">Import Model</h2>
+    <p class="help">Paste model import data, every line containing id;name;description -fields. Field separator is semicolon.</p>
+    <form>
+    <textarea rows="30" cols="80" id="modelInputArea">
+    </textarea>
+    <input type="button" class="button is-primary" onclick="javascript:userClicksImportModelDataButton()" value="Import"></input>
+</form>    
+</div>
+    <div id="pagesDiv" class="container" style="display:none;">
+        <h2 class="subtitle">Pages</h2>
+        <ul id="pageList">
+            <li>...</li>
+        </ul>
+        <button class="button is-primary js-modal-trigger is-right" data-target="modal-addpage" >Add Page</button>
+    </div>
+
+    <div id="modal-addpage" class="modal">
+        <div class="modal-background"></div>
+      
+        <div class="modal-content">
+          <div class="box">
+            <label class="label" for="newPageNameInput">Name it:</label>
+            <input class="input" id="newPageNameInput" type="text" placeholder="page-name"></div>
+            <!-- Your content -->
+          </div>
+        </div>
+      
+        <button class="modal-close is-large" aria-label="close" value="Close"></button>
+      </div>
+
+    <div id="dataDiv" class="container" style="display:none;">
+        <h2 class="subtitle">Data</h2>
+    </div>
+
+    <div id="inputsDiv" class="container" style="display:none;">
+        <h2 class="subtitle">Inputs</h2>
+        <ul class="list" id="inputList">
+            
+        </ul>
+        <div class="box">
+<form id="inputWidgetForm">
+<ul class="control">
+    <li> <label for="inputModelElement" class="label">Data Model Element:</label>  <input  class="input" id="inputModelElement" type="text" ></input></li>
+    <li> <label for="inputLabelValue" class="label">Input label:</label>            <input  class="input" id="inputLabelValue" type="text" ></input></li>
+    <li> <label for="inputHelpValue" class="label">Input help:</label>            <input  class="input" id="inputHelpValue" type="text" ></input></li>
+    <li><label for="inputType" class="label">Input type:</label>                    
+        <select class="select" id="inputType">
+           <option value="text">Text</option>
+           <option value="number">Number</option>
+           <option value="select">Select Dropdown</option>
+           <option value="checkbox">Checkbox(es)</option>
+           <option value="radioGroup">Radio group</option>
+           <option value="date">Date</option>
+           <option  value="time">Time</option>
+           <option value="hidden">Hidden</option>
+           <option value="button">Button</option>
+           <option value="group">Group</option>
+        </select></li>
+    <li> <label for="inputAltTextValue" class="label">Input Alt text:</label> <textarea class="textarea" id="inputAltTextValue" rows="5" cols="25" ></textarea></li>
+
+   <li class="is-right"> <input type="button" class="button is-primary is-right" onclick="javascript:userClicksSubmitElement()" value="add"></li>
+</ul>
+</form>
+</div>
+</div>
+</div>
+
+
+
+    </div>
+    </div>
+
+</section>
+</body>
+
+</html>
